@@ -7,6 +7,8 @@ from app import app
 def index():
     user = {'nickname': 'Miguel'}
 
+    # Adding a comment for a git test
+
     return render_template('index.html',
                            user=user)
 
