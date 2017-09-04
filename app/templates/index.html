@@ -1,0 +1,15 @@
+<html>
+	<head>
+		{% if title %}
+		<title>CTSM - {{ title }}</title>
+		{% else %}
+			<title>CTSM - Home</title>
+		{% endif %}
+	</head>
+	
+	<body>
+		{% if user %}
+		<h1>Hello {{ user.nickname }}!</h1>
+		{% endif %}
+	</body>
+</html>
