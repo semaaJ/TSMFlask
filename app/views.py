@@ -18,7 +18,6 @@ twitter = tweepy.API(auth)
 @app.route('/')
 @app.route('/index')
 def index():
-    # Adding a comment for a git test
     return render_template('index.html')
 
 

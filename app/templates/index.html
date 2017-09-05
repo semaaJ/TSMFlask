@@ -5,7 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="../static/assets/css/main.css" />
+		<link rel="stylesheet" href= "{{ url_for('static', filename='assets/css/main.css') }}"
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
 	<body>
@@ -14,7 +14,7 @@
 		<div class="background">
 			<section id="banner">
 				<h2><strong>Celebrity Twitter</strong> Stock Monitor</h2>
-				<h5>Monitoring celebrity's tweets and seeing </br> how they effect companies' stock prices! </h5>
+				<h3>Monitoring celebrity's tweets and seeing </br> how they effect companies' stock prices! </h3>
 				
 				<ul class="actions">
 					<li><a href="#" class="button special" style="background-color:#3498db">Donald Trump</a></li>

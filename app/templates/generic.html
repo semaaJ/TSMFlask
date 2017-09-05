@@ -5,7 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="../static/assets/css/main.css" />
+		<link rel="stylesheet" href= "../static/assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
 	<body>
@@ -14,17 +14,17 @@
 		<div class="background">
 			<section id="banner">
 				<h2><strong>{{ title }}</strong></h2>
-				<p><i>Donald John Trump (born June 14, 1946) is the 45th </br> 
+				<p>Donald John Trump (born June 14, 1946) is the 45th </br> 
 					  and current President of the United States, </br>
 					  in office since January 20, 2017. Before entering politics, </br>
-					  he was a businessman and television personality.</i></p>
+					  he was a businessman and television personality.</p>
 				
-				<hr>
 				
 				<h1>Latest Tweet</h1>
-				
-				
-				<hr>
+				https://publish.twitter.com/oembed?url=https://twitter.com/Interior/status/463440424141459456
+		
+			
+			
 				
 				<h1>Current Companies Mentioned</h1>
 					{% if currentCompanies %}
@@ -34,8 +34,6 @@
 					{% else %}
 						<p>Nothing to show! :)</p>
 					{% endif %}
-	
-				<hr>
 				
 				<h1>Past Companies Mentioned</h1>
 					{% if pastCompanies %}
@@ -48,9 +46,6 @@
 				
 			</section>
 			
-			<div class="generic">
-					
-			</div>
 			
 				<!-- Footer -->
 			<footer id="footer">
@@ -73,22 +68,7 @@
 			<script src="https://use.fontawesome.com/48a1424f17.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="../static/assets/js/main.js"></script>
-			
-			<script>window.twttr = (function(d, s, id) {
-					var js, fjs = d.getElementsByTagName(s)[0],
-					t = window.twttr || {};
-					if (d.getElementById(id)) return t;
-						js = d.createElement(s);
-						js.id = id;
-						js.src = "https://platform.twitter.com/widgets.js";
-						fjs.parentNode.insertBefore(js, fjs);
+			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-						t._e = [];
-						t.ready = function(f) {
-							t._e.push(f);
-						};
-
-					return t;
-				}(document, "script", "twitter-wjs"));</script>
 	</body>
 </html>
