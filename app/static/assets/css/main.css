@@ -3628,6 +3628,16 @@
 				#banner .button.special:active {
 					background-color: #008183;
 				}
+				
+		#banner h1 {
+			font-size: 1.5em;
+			font-weight: bold;
+		}
+		
+		#banner hr {
+			margin-left: 400px;
+			margin-right: 400px;
+		}
 
 		#banner h2 {
 			border-style: double solid;
@@ -3640,8 +3650,8 @@
 			width: 40%;
 		}
 
-		#banner p {
-			font-size: 1.5em;
+		#banner h5 {
+			font-size: 1.2em;
 			text-transform: uppercase;
 		}
 
@@ -3729,6 +3739,7 @@
 .nav a{
 	text-decoration: none;
 }
+
 
 /* Footer */
 
