@@ -12,7 +12,14 @@ def index():
     return render_template('index.html',
                            user=user)
 
+
 @app.route('/DonaldTrump')
 def donald_trump():
-    return render_template('index.html',
-                           title='Donald Trump')
+    return render_template('generic.html',
+                           title='Donald Trump',
+                           info="Donald Trump is the current president of the USA.")
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('error404.html'), 404
