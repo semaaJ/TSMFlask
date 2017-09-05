@@ -14,12 +14,43 @@
 		<div class="background">
 			<section id="banner">
 				<h2><strong>{{ title }}</strong></h2>
-				<p> {{ info }} </p>
+				<p><i>Donald John Trump (born June 14, 1946) is the 45th </br> 
+					  and current President of the United States, </br>
+					  in office since January 20, 2017. Before entering politics, </br>
+					  he was a businessman and television personality.</i></p>
+				
+				<hr>
+				
+				<h1>Latest Tweet</h1>
 				
 				
+				<hr>
 				
-			
+				<h1>Current Companies Mentioned</h1>
+					{% if currentCompanies %}
+						{% for company in currentCompanies %}
+							<h4> {{ company }} </h4>
+						{% endfor %}
+					{% else %}
+						<p>Nothing to show! :)</p>
+					{% endif %}
+	
+				<hr>
+				
+				<h1>Past Companies Mentioned</h1>
+					{% if pastCompanies %}
+						{% for company in pastCompanies %}
+							<h4> {{ company }} </h4>
+						{% endfor %}
+					{% else %}
+						<p>Nothing to show! :)</p>
+					{% endif %}
+				
 			</section>
+			
+			<div class="generic">
+					
+			</div>
 			
 				<!-- Footer -->
 			<footer id="footer">
@@ -42,6 +73,22 @@
 			<script src="https://use.fontawesome.com/48a1424f17.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="../static/assets/js/main.js"></script>
+			
+			<script>window.twttr = (function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0],
+					t = window.twttr || {};
+					if (d.getElementById(id)) return t;
+						js = d.createElement(s);
+						js.id = id;
+						js.src = "https://platform.twitter.com/widgets.js";
+						fjs.parentNode.insertBefore(js, fjs);
 
+						t._e = [];
+						t.ready = function(f) {
+							t._e.push(f);
+						};
+
+					return t;
+				}(document, "script", "twitter-wjs"));</script>
 	</body>
 </html>
