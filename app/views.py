@@ -25,11 +25,19 @@ def index():
 def donald_trump():
     latest_tweet = twitter.user_timeline(screen_name='realDonaldTrump', count=1)[0]
 
+    labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
+    values = [10, 9, 8, 7, 6, 4, 7, 8]
+
+    d = {'Donald Trump - 6/9/2017': {'legend': 'Trump',
+                                     'labels': ["January", "February", "March",
+                                                "April", "May", "June", "July", "August"],
+                                     'values': [10, 9, 8, 7, 6, 4, 7, 8]
+                                     }}
+
     return render_template('generic.html',
                            title='Donald Trump',
-                           currentCompanies=None,
-                           pastCompanies=None
-                           )
+                           **d,
+                           legend='Donald Trump - 6/9/2017')
 
 
 @app.errorhandler(404)

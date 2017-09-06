@@ -20,34 +20,17 @@
 					  he was a businessman and television personality.</p>
 				
 				
-				<h1>Latest Tweet</h1>
-				https://publish.twitter.com/oembed?url=https://twitter.com/Interior/status/463440424141459456
-		
-			
-			
-				
-				<h1>Current Companies Mentioned</h1>
-					{% if currentCompanies %}
-						{% for company in currentCompanies %}
-							<h4> {{ company }} </h4>
-						{% endfor %}
-					{% else %}
-						<p>Nothing to show! :)</p>
-					{% endif %}
-				
-				<h1>Past Companies Mentioned</h1>
-					{% if pastCompanies %}
-						{% for company in pastCompanies %}
-							<h4> {{ company }} </h4>
-						{% endfor %}
-					{% else %}
-						<p>Nothing to show! :)</p>
-					{% endif %}
+				<h1>Chart</h1>
+				{% for company in d %}
+					<canvas id="chart" width="800" height="400"></canvas>
+				{% endfor %}
+
+
 				
 			</section>
 			
 			
-				<!-- Footer -->
+			<!-- Footer -->
 			<footer id="footer">
 				<div class="copyright">
 					<a href="http://www.github.com/semaaJ"><i class="fa fa-github-square fa-4x" aria-hidden="true"></i></a>
@@ -56,19 +39,70 @@
 			</footer>
 		
 		</div>
-			
-			
-
-
 
 		<!-- Scripts -->
-			<script src="../static/assets/js/jquery.min.js"></script>
-			<script src="../static/assets/js/skel.min.js"></script>
-			<script src="../static/assets/js/util.js"></script>
-			<script src="https://use.fontawesome.com/48a1424f17.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="../static/assets/js/main.js"></script>
-			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<script src='../static/assets/js/Chart.min.js'></script>
+		<script src="../static/assets/js/jquery.min.js"></script>
+		<script src="../static/assets/js/skel.min.js"></script>
+		<script src="../static/assets/js/util.js"></script>
+		<script src="https://use.fontawesome.com/48a1424f17.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="../static/assets/js/main.js"></script>
+
+		<script>
+
+   // bar chart data
+   var barData = {
+   labels : [{% for item in company['labels'] %}
+                  "{{item}}",
+              {% endfor %}],
+   datasets : [
+      {
+            label: '{{ [company]['legend'] }}',
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            bezierCurve : false,
+            data : [{% for item in company['values'] %}
+                      {{item}},
+                    {% endfor %}]
+      }]
+   }
+
+    Chart.defaults.global.animationSteps = 50;
+    Chart.defaults.global.tooltipYPadding = 16;
+    Chart.defaults.global.tooltipCornerRadius = 0;
+    Chart.defaults.global.tooltipTitleFontStyle = "normal";
+    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+    Chart.defaults.global.animationEasing = "easeOutBounce";
+    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.scaleLineColor = "black";
+    Chart.defaults.global.scaleFontSize = 16;
+
+   // get bar chart canvas
+   var mychart = document.getElementById("chart").getContext("2d");
+
+   steps = 10
+   max = 10
+   // draw bar chart
+   var LineChartDemo = new Chart(mychart).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+
+   });
+
+
+</script>
 
 	</body>
 </html>
