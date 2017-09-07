@@ -6,8 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href= "../static/assets/css/main.css" />
+		<link rel="stylesheet" href="https://unpkg.com/tachyons@4.8.0/css/tachyons.min.css"/>
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
+
 	<body>
 
 		<!-- Banner -->
@@ -18,15 +20,15 @@
 					  and current President of the United States, </br>
 					  in office since January 20, 2017. Before entering politics, </br>
 					  he was a businessman and television personality.</p>
-				
-				
-				<h1>Chart</h1>
-				{% for company in d %}
-					<canvas id="chart" width="800" height="400"></canvas>
-				{% endfor %}
 
 
-				
+				<h1>Charts</h1>
+				<div id="root" class="cf w-100">
+
+				</div>
+
+
+
 			</section>
 			
 			
@@ -41,68 +43,74 @@
 		</div>
 
 		<!-- Scripts -->
-		<script src='../static/assets/js/Chart.min.js'></script>
 		<script src="../static/assets/js/jquery.min.js"></script>
 		<script src="../static/assets/js/skel.min.js"></script>
 		<script src="../static/assets/js/util.js"></script>
 		<script src="https://use.fontawesome.com/48a1424f17.js"></script>
 		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 		<script src="../static/assets/js/main.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"> </script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"> </script>
+
 
 		<script>
+			const json = `{{ data }}`;
 
-   // bar chart data
-   var barData = {
-   labels : [{% for item in company['labels'] %}
-                  "{{item}}",
-              {% endfor %}],
-   datasets : [
-      {
-            label: '{{ [company]['legend'] }}',
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            bezierCurve : false,
-            data : [{% for item in company['values'] %}
-                      {{item}},
-                    {% endfor %}]
-      }]
-   }
+			const data = Object.entries(JSON.parse(json)).map(([name, set]) =>
+				Object.values(set.sharePriceList)
+					.filter(d => d.length > 0)
+					.map(data => ({
+						name: name,
+						set: data.reduce(
+							(prev, cur) => {
+								const [date, value] = cur;
+								return {
+									labels: [...prev.labels, date],
+									data: [...prev.data, value],
+								};
+							},
+							{ labels: [], data: [] },
+						),
+					})),
+			);
 
-    Chart.defaults.global.animationSteps = 50;
-    Chart.defaults.global.tooltipYPadding = 16;
-    Chart.defaults.global.tooltipCornerRadius = 0;
-    Chart.defaults.global.tooltipTitleFontStyle = "normal";
-    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
-    Chart.defaults.global.animationEasing = "easeOutBounce";
-    Chart.defaults.global.responsive = false;
-    Chart.defaults.global.scaleLineColor = "black";
-    Chart.defaults.global.scaleFontSize = 16;
+			const stats = data.map(arr => arr[0]);
 
-   // get bar chart canvas
-   var mychart = document.getElementById("chart").getContext("2d");
+			const root = document.getElementById('root');
 
-   steps = 10
-   max = 10
-   // draw bar chart
-   var LineChartDemo = new Chart(mychart).Line(barData, {
-        scaleOverride: true,
-        scaleSteps: steps,
-        scaleStepWidth: Math.ceil(max / steps),
-        scaleStartValue: 0,
-        scaleShowVerticalLines: true,
-        scaleShowGridLines : true,
-        barShowStroke : true,
-        scaleShowLabels: true,
-        bezierCurve: false,
+			for (const stat of stats) {
+				const container = document.createElement('div');
+				container.className = 'fl w-100';
 
-   });
+				const canvas = document.createElement('canvas');
+				container.appendChild(canvas);
+				const init = root.appendChild(container);
+				const ctx = canvas.getContext('2d');
+
+				const gradient = ctx.createLinearGradient(0, 0, 0, container.clientHeight * 5);
+				gradient.addColorStop(0, "rgba(18,224,148,1)");
+				gradient.addColorStop(0.5, "rgba(2,133,163,1) ");
+				gradient.addColorStop(1, "rgba(2,133,163,1)");
+
+				const chart = new Chart(ctx, {
+					responsive: true,
+					maintainAspectRatio: true,
+					data: {
+						labels: stat.set.labels,
+						datasets: [
+							{
+								backgroundColor: gradient,
+								label: stat.name,
+								data: stat.set.data,
+							},
+						],
+					},
+					type: 'line',
+				});
+			}
+		</script>
 
 
-</script>
 
 	</body>
 </html>
