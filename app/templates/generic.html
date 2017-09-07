@@ -5,7 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href= "../static/assets/css/main.css" />
+		<link rel="stylesheet" href= "{{ url_for('static', filename='assets/css/main.css') }}">
 		<link rel="stylesheet" href="https://unpkg.com/tachyons@4.8.0/css/tachyons.min.css"/>
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
@@ -16,22 +16,24 @@
 		<div class="background">
 			<section id="banner">
 				<h2><strong>{{ title }}</strong></h2>
-				<p>Donald John Trump (born June 14, 1946) is the 45th </br> 
-					  and current President of the United States, </br>
-					  in office since January 20, 2017. Before entering politics, </br>
-					  he was a businessman and television personality.</p>
-
-
-				<h1>Charts</h1>
-				<div id="root" class="cf w-100">
-
+				<div class="info"">
+					<p>
+						Donald John Trump is the 45th and current President of the United States,
+						in office since January 20, 2017. Before entering politics,
+						he was a businessman and television personality.
+					</p>
 				</div>
 
+				<h1>Current Companies Being Monitored</h1>
+					<div id="root" class="cf w-100">
 
+					</div>
+
+
+				<h1>Past Companies Monitored</h1>
 
 			</section>
-			
-			
+
 			<!-- Footer -->
 			<footer id="footer">
 				<div class="copyright">
@@ -54,7 +56,7 @@
 
 
 		<script>
-			const json = `{{ data }}`;
+			const json = `{{ data|safe }}`;
 
 			const data = Object.entries(JSON.parse(json)).map(([name, set]) =>
 				Object.values(set.sharePriceList)
@@ -109,8 +111,6 @@
 				});
 			}
 		</script>
-
-
 
 	</body>
 </html>

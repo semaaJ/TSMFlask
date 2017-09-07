@@ -8,8 +8,8 @@
 		<link rel="stylesheet" href= "{{ url_for('static', filename='assets/css/main.css') }}"
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
-	<body>
 
+	<body>
 		<!-- Banner -->
 		<div class="background">
 			<section id="banner">
@@ -17,7 +17,7 @@
 				<h3>Monitoring celebrity's tweets and seeing </br> how they effect companies' stock prices! </h3>
 				
 				<ul class="actions">
-					<li><a href="#" class="button special" style="background-color:#3498db">Donald Trump</a></li>
+					<li><a href="{{ url_for('donald_trump') }}" class="button special" style="background-color:#3498db">Donald Trump</a></li>
 					<li><a href="#" class="button special" style="background-color:#8e44ad">Katy Perry</a></li>
 					<li><a href="#" class="button special" style="background-color:#e67e22">Taylor Swift</a></li>
 				</ul>

@@ -3505,9 +3505,9 @@
 .background{
 	background: linear-gradient(45deg, #0f0c29, #302b63);
 }
+
 		
 /* Banner */
-
 
 	#banner {
 		color: #ffffff;
@@ -3661,7 +3661,6 @@
 			#banner {
 				padding: 8em 0 6em 0;
 			}
-			
 		}
 
 		@media screen and (max-width: 1280px) {
@@ -3860,3 +3859,38 @@
 			}
 
 		}
+
+#root {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+  width: 80%;
+  height: 60%;
+}
+
+.chart {
+  max-width: 50vw;
+}
+
+.info{
+    width: 60%;
+    margin: auto;
+}
+
+@media screen and (max-width: 736px) {
+
+    .info{
+        width: 100%;
+        margin: auto;
+         }
+
+}
+
+		@media screen and (max-width: 480px) {
+        .info{
+            width: 100%;
+            margin: auto;
+            }
+		}
+
