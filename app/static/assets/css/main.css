@@ -3894,3 +3894,14 @@
             }
 		}
 
+.sep{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    }
+
+.sep hr{
+    margin: auto;
+    max-width: 400px;
+    color: #ffffff;
+}
