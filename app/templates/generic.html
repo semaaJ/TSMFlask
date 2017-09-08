@@ -15,35 +15,22 @@
 		<!-- Banner -->
 		<div class="background">
 			<section id="banner">
-				<h2>{{ title }}</h2>
+				<h2> {{ title }} </h2>
 
 				<div class="info">
-					<p> {{ info }} </p>
+					<p>{{ info }} </p>
 				</div>
 
 				<div class="sep"><hr></div>
 				<h1>Current Companies </br> Being Monitored</h1>
 				<div class="sep"><hr></div>
 
-				{% if data %}
-					<div id="root" class="cf w-100">
-						<div class="sep"><hr></div>
-					</div>
-				{% else %}
-					<div class="sorry"><p>We are not monitoring any companies at the moment!</p></div>
-				{% endif %}
 
-				<div class="sep"><hr></div>
-				<h1>Past Companies </br> Monitored</h1>
-				<div class="sep"><hr></div>
+				<div id="root" class="cf w-100">
 
-				{% if pastdata %}
-					<div id="root" class="cf w-100">
-						<div class="sep"><hr></div>
-					</div>
-				{% else %}
-					<div class="sorry"><p>Sorry, nothing to show here!</p></div>
-				{% endif %}
+				</div>
+
+
 
 			</section>
 
@@ -67,12 +54,12 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"> </script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"> </script>
 
-
 		<script>
-			const json = `{{ data|safe }}`;
-			var jsondata = JSON.parse(json);
+		const json = `{{ data|safe }}`;
+		const sections = JSON.parse(json);
 
-			const data = Object.entries(jsondata).map(([name, set]) =>
+		function parseSet(info) {
+			const data = Object.entries(info).map(([name, set]) =>
 				Object.values(set.sharePriceList)
 					.filter(d => d.length > 0)
 					.map(data => ({
@@ -90,39 +77,50 @@
 					})),
 			);
 
-			const stats = data.map(arr => arr[0]);
+			return data.map(arr => arr[0]);
+		}
 
-			const root = document.getElementById('root');
+
+		const base = document.getElementById('root');
+
+		for (const [name, info] of Object.entries(sections)) {
+			const stats = parseSet(info);
+
+			const root = document.createElement('section');
+			const header = document.createElement('h1');
+			header.innerText = name;
+
+			base.appendChild(root);
+			root.appendChild(header);
 
 			for (const stat of stats) {
 				const container = document.createElement('div');
 				container.className = 'fl w-100 chart';
 
 				const tweet = document.createElement('div');
-    			tweet.className = 'tweet';
-   				tweet.innerHTML = "\"" + jsondata[stat.name]["tweet"] + "\"";
-    			container.appendChild(tweet);
+				tweet.className = 'tweet';
+				tweet.innerHTML = `${info[stat.name].tweet}`;
+				container.appendChild(tweet);
 
 				const canvas = document.createElement('canvas');
 				container.appendChild(canvas);
-				const init = root.appendChild(container);
+				const init = base.appendChild(container);
 				const ctx = canvas.getContext('2d');
 
 				const gradient = ctx.createLinearGradient(0, 0, 0, container.clientHeight * 5);
-				gradient.addColorStop(0, "rgba(18,224,148,1)");
-				gradient.addColorStop(0.5, "rgba(2,133,163,1) ");
-				gradient.addColorStop(1, "rgba(2,133,163,1)");
+				gradient.addColorStop(0, 'rgba(18,224,148,1)');
+				gradient.addColorStop(0.5, 'rgba(2,133,163,1) ');
+				gradient.addColorStop(1, 'rgba(2,133,163,1)');
 
-				var name = jsondata[stat.name]["companyName"];
-				name = name.charAt(0).toUpperCase() + name.slice(1);
+				const rawName = info[stat.name].companyName;
+				const name = rawName.charAt(0).toUpperCase() + rawName.slice(1);
 
-				var date = jsondata[stat.name]["dateMentioned"].split(" ")[0].split("-");
+				const rawDate = info[stat.name].dateMentioned.split(' ')[0].split('-');
+				const date = rawDate.map(el => el.replace(/^0+/, ''));
 
-				for(var i = 0; i < date.length; i++){
-				  date[i] = date[i].replace(/^0+/, '');
-				}
+				const [day, month, year] = date;
 
-				var label = name + " - Mentioned on: " + date[0] + "/" + date[1] + "/" + date[2];
+				const label = `${name} - Mentioned on: ${day}/${month}/${year}`;
 
 				const chart = new Chart(ctx, {
 					responsive: false,
@@ -140,8 +138,8 @@
 					type: 'line',
 				});
 			}
-
-		</script>
+		}
+	</script>
 
 	</body>
 </html>
