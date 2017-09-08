@@ -21,16 +21,10 @@
 					<p>{{ info }} </p>
 				</div>
 
-				<div class="sep"><hr></div>
-				<h1>Current Companies </br> Being Monitored</h1>
-				<div class="sep"><hr></div>
-
 
 				<div id="root" class="cf w-100">
 
 				</div>
-
-
 
 			</section>
 
@@ -88,6 +82,7 @@
 
 			const root = document.createElement('section');
 			const header = document.createElement('h1');
+			header.className = 'section__header';
 			header.innerText = name;
 
 			base.appendChild(root);
