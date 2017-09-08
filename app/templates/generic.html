@@ -47,13 +47,14 @@
 		<script src="../static/assets/js/main.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"> </script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"> </script>
+		<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 
 		<script>
 		const json = `{{ data|safe }}`;
 		const sections = JSON.parse(json);
 
 		function parseSet(info) {
-			const data = Object.entries(info).map(([name, set]) =>
+			const data = Object.entries(info).filter(([name]) => name !== "empty").map(([name, set]) =>
 				Object.values(set.sharePriceList)
 					.filter(d => d.length > 0)
 					.map(data => ({
@@ -78,16 +79,25 @@
 		const base = document.getElementById('root');
 
 		for (const [name, info] of Object.entries(sections)) {
-			const stats = parseSet(info);
 
 			const root = document.createElement('section');
 			const header = document.createElement('h1');
-			header.className = 'section__header';
 			header.innerText = name;
-
+			header.className = 'section__header';
 			base.appendChild(root);
 			root.appendChild(header);
 
+			console.log(Object.keys(info).length)
+
+			if (Object.keys(info).length <= 1) {
+				const message = document.createElement('div');
+				message.className = 'section__error';
+				message.innerText = info.empty;
+				root.appendChild(message);
+				continue;
+			}
+
+			const stats = parseSet(info);
 			for (const stat of stats) {
 				const container = document.createElement('div');
 				container.className = 'fl w-100 chart';

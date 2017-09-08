@@ -39,8 +39,12 @@ def return_data(handle):
         past_data = json.load(f)
 
     data = {
-        "current companies being monitored": {},
-        "past companies monitored": {}
+        "current companies being monitored": {
+            "empty": "We are not currently monitoring any companies!",
+        },
+        "past companies monitored": {
+            "empty": "Sorry, nothing to show here!",
+        }
     }
 
     for item in current_data:
