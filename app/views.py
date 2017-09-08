@@ -12,19 +12,13 @@ def index():
 
 @app.route('/DonaldTrump')
 def donald_trump():
-    current_data = return_data('JohnFreakingSmi')
-    #past_data = return_past_data('realDonaldTrump')
-
-    if len(current_data) == 0:
-        current_data = None
-
+    data = return_data('JohnFreakingSmi')
     return render_template('generic.html',
                            title='Donald Trump',
                            info=f'Donald John Trump is the 45th and current President of the United States,'
                                 f' in office since January 20, 2017. Before entering politics,'
                                 f' he was a businessman and television personality.',
-                           data=json.dumps(current_data),
-                           pastdata=None)
+                           data=json.dumps(data))
 
 
 @app.errorhandler(404)
@@ -34,16 +28,29 @@ def page_not_found(error):
 
 def return_data(handle):
     """Gets all the current companies being monitored
-       by the handle arg"""
+       by the handle arg
+
+       data_type = current/old json file"""
 
     with open(r'C:\Users\James\Desktop\CTSM\Monitor\Files\monitor.json', 'r') as f:
-        data = json.load(f)
+        current_data = json.load(f)
 
-    new_data = {}
+    with open(r'C:\Users\James\Desktop\CTSM\Monitor\Files\past_companies.json', 'r') as f:
+        past_data = json.load(f)
 
-    for item in data:
-        if data[item]["handle"] == handle:
-            new_data[item] = {}
-            new_data[item].update(data[item])
+    data = {
+        "current companies being monitored": {},
+        "past companies monitored": {}
+    }
 
-    return new_data
+    for item in current_data:
+        if current_data[item]["handle"] == handle:
+            data["current companies being monitored"][item] = {}
+            data["current companies being monitored"][item].update(current_data[item])
+
+    for item in past_data:
+        if past_data[item]["handle"] == handle:
+            data["past companies monitored"][item] = {}
+            data["past companies monitored"][item].update(past_data[item])
+
+    return data
