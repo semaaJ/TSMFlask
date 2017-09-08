@@ -3865,14 +3865,20 @@
   align-items: center;
   flex-direction: column;
   margin: auto;
-
 }
 
 .chart {
   max-width: 70vw;
 }
 
-
+.section__header {
+  border: 1px solid #ffffff;
+  border-left-style: none;
+  border-right-style: none;
+  padding: 15px 60px 15px 60px;
+  text-transform: uppercase;
+  max-width: 450px;
+}
 
 .info{
     width: 60%;
@@ -3910,3 +3916,5 @@
 .sorry {
     margin-top: 20px;
 }
+
+strong { font-weight: bold; }
