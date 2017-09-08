@@ -3865,13 +3865,14 @@
   align-items: center;
   flex-direction: column;
   margin: auto;
-  width: 80%;
-  height: 60%;
+
 }
 
 .chart {
-  max-width: 50vw;
+  max-width: 70vw;
 }
+
+
 
 .info{
     width: 60%;
@@ -3896,7 +3897,7 @@
 
 .sep{
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     color: #ffffff;
     }
 
@@ -3904,4 +3905,8 @@
     margin: auto;
     max-width: 400px;
     color: #ffffff;
+}
+
+.sorry {
+    margin-top: 20px;
 }
