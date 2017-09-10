@@ -32,10 +32,10 @@ def return_data(handle):
 
        data_type = current/old json file"""
 
-    with open(r'C:\Users\James\Desktop\CTSM\Monitor\Files\monitor.json', 'r') as f:
+    with open(r'C:\Users\Mames\Desktop\TSM\Monitor\Files\monitor.json', 'r') as f:
         current_data = json.load(f)
 
-    with open(r'C:\Users\James\Desktop\CTSM\Monitor\Files\past_companies.json', 'r') as f:
+    with open(r'C:\Users\Mames\Desktop\TSM\Monitor\Files\past_companies.json', 'r') as f:
         past_data = json.load(f)
 
     data = {
