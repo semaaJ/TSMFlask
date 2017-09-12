@@ -18,15 +18,31 @@
 				
 				<ul class="actions">
 					<li><a href="{{ url_for('donald_trump') }}" class="button special" style="background-color:#3498db">Donald Trump</a></li>
-					<li><a href="#" class="button special" style="background-color:#8e44ad">Katy Perry</a></li>
-					<li><a href="#" class="button special" style="background-color:#e67e22">Taylor Swift</a></li>
+					<li><a href="{{ url_for('lebron_james') }}" class="button special" style="background-color:#8e44ad">LeBron James</a></li>
+					<li><a href="{{ url_for('justin_bieber') }}" class="button special" style="background-color:#e67e22">Justin Bieber</a></li>
 				</ul>
 
 				<ul class="actions">
-					<li><a href="#" class="button special" style="background-color:#9b59b6">Drake</a></li>
-					<li><a href="#" class="button special" style="background-color:#7f8c8d">Eminem</a></li>
-					<li><a href="#" class="button special" style="background-color:#2ecc71">Taylor Swift</a></li>
-				</ul>			
+					<li><a href="{{ url_for('katy_perry') }}" class="button special" style="background-color:#9b59b6">Katy Perry</a></li>
+					<li><a href="{{ url_for('rihanna') }}" class="button special" style="background-color:#7f8c8d">Rihanna</a></li>
+					<li><a href="{{ url_for('eminem') }}" class="button special" style="background-color:#2ecc71">Eminem</a></li>
+				</ul>
+
+				<ul class="actions">
+					<li><a href="{{ url_for('katy_perry') }}" class="button special" style="background-color:#9b59b6">Katy Perry</a></li>
+					<li><a href="{{ url_for('rihanna') }}" class="button special" style="background-color:#7f8c8d">Rihanna</a></li>
+					<li><a href="{{ url_for('eminem') }}" class="button special" style="background-color:#2ecc71">Eminem</a></li>
+				</ul>
+
+
+				<div class="form-style-6">
+					<h1>Want to see a celebrity monitored?</h1>
+					<form method="POST">
+						<input type="text" name="name" placeholder="Their Name"/>
+						<input type="text" name="handle" placeholder="Their Twitter Handle"></input>
+						<input type="submit" value="Send" />
+					</form>
+				</div>
 			</section>
 			
 			<!-- Footer -->
