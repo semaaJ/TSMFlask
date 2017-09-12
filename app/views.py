@@ -1,16 +1,20 @@
 import json
 
-from flask import render_template
+from flask import render_template, request
 from app import app
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        name = request.form['name']
+        handle = request.form['handle']
+
     return render_template('index.html')
 
 
-@app.route('/DonaldTrump')
+
+@app.route('/donaldtrump')
 def donald_trump():
     data = return_data('JohnFreakingSmi')
     return render_template('generic.html',
@@ -21,9 +25,69 @@ def donald_trump():
                            data=json.dumps(data))
 
 
+@app.route('/lebronjames')
+def lebron_james():
+    data = return_data('KingJames')
+    return render_template('generic.html',
+                           title='Le Bron James',
+                           info=f'LeBron Raymone James, born December 30 1984, is an American professional'
+                                f' basketball player for the Cleveland Cavaliers of the National Basketball'
+                                f' Association (NBA)',
+                           data=json.dumps(data))
+
+
+@app.route('/justinbieber')
+def justin_bieber():
+    data = return_data('justinbieber')
+    return render_template('generic.html',
+                           title='Justin Bieber',
+                           info=f'Justin Drew Bieber born March 1, 1994 is a Canadian singer and songwriter.'
+                                f' Bieber has won numerous awards, including the American Music Award for Artist'
+                                f' of the Year in 2010 and 2012.',
+                           data=json.dumps(data))
+
+
+@app.route('/katyperry')
+def katy_perry():
+    data = return_data('ketyperry')
+    return render_template('generic.html',
+                           title='Katy Perry',
+                           info=f'Donald John Trump is the 45th and current President of the United States,'
+                                f' in office since January 20, 2017. Before entering politics,'
+                                f' he was a businessman and television personality.',
+                           data=json.dumps(data))
+
+
+@app.route('/rihanna')
+def rihanna():
+    data = return_data('rihanna')
+    return render_template('generic.html',
+                           title='Rihanna',
+                           info=f'Robyn Rihanna Fenty February 20, 1988 is a Barbadian singer, songwriter, and actress.'
+                                f' With sales exceeding 230 million records worldwide, Rihanna is one of the'
+                                f' best-selling artists of all time.',
+                           data=json.dumps(data))
+
+
+@app.route('/eminem')
+def eminem():
+    data = return_data('eminem')
+    return render_template('generic.html',
+                           title='Eminem',
+                           info=f'Marshall Bruce Mathers III born October 17, 1972 known professionally as Eminem'
+                                f' is an American rapper, record producer, and actor. Eminem is the best-selling artist'
+                                f' of the 2000s in the United States. With US sales of 45.1 million albums and'
+                                f' 42 million tracks as of June 2014,',
+                           data=json.dumps(data))
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('error404.html'), 404
+
+
+def email_data(name, handle):
+    pass
 
 
 def return_data(handle):
