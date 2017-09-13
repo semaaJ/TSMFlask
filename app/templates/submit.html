@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>CTSM - Submit</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href= "{{ url_for('static', filename='assets/css/submit.css') }}">
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+
+    <body>
+
+        <div class="container">
+            <form id="contact" action="" method="post">
+                <h3>Want to see a Celebrity monitored?</h3>
+                <h4>Enter their information below! Once you had clicked the submit button, you wil be returned to the homepage.</h4>
+
+                <fieldset>
+                    <input placeholder="Their Name" type="text" name="name" tabindex="1" required autofocus>
+                </fieldset>
+
+                <fieldset>
+                  <input placeholder="Their Twitter Handle" type="text" name="handle" tabindex="2" required>
+                </fieldset>
+
+                <fieldset>
+                  <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+
+    </body>
+
+</html>
