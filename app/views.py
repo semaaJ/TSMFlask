@@ -6,12 +6,19 @@ from app import app
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    return render_template('index.html')
+
+
+@app.route('/submit',  methods=['GET', 'POST'])
+def submit():
     if request.method == 'POST':
         name = request.form['name']
         handle = request.form['handle']
 
-    return render_template('index.html')
 
+        return render_template('index.html')
+
+    return render_template('submit.html')
 
 
 @app.route('/donaldtrump')
