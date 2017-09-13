@@ -1,10 +1,12 @@
 import json
+import threading
+import smtplib
 
 from flask import render_template, request
 from app import app
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -15,6 +17,7 @@ def submit():
         name = request.form['name']
         handle = request.form['handle']
 
+        threading.Thread(target=email_data, args=(name, handle,)).start()
 
         return render_template('index.html')
 
@@ -94,7 +97,17 @@ def page_not_found(error):
 
 
 def email_data(name, handle):
-    pass
+    try:
+        text = f'A new Celebrity has just been submitted. {name} - {handle}'
+
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login("trump4cast@gmail.com", "cosmos2011")
+        server.sendmail("trump4cast@gmail.com", "james.miles2@mail.dcu.ie", text)
+        server.quit()
+
+    except smtplib.SMTPException as error:
+        pass
 
 
 def return_data(handle):
