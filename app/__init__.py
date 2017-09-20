@@ -93,6 +93,30 @@ def eminem():
                                 f' 42 million tracks as of June 2014,',
                            data=json.dumps(data))
 
+@app.route('/elizabethwarren')
+def elizabeth_warren():
+    data = return_data('senwarren')
+
+    return render_template('generic.html',
+                           title='Elizabeth Warren',
+                           info=f'Elizabeth Ann Warren is an American academic and politician. A member of the Democratic Party,'
+                                f' she is the senior United States Senator from Massachusetts. Warren was formerly a professor of law,'
+                                f' and taught at the University of Texas School of Law, the University of Pennsylvania Law School,'
+                                f' and most recently at Harvard Law School.',
+                           data=json.dumps(data))
+
+@app.route('/nicolasmaduro')
+def nicolas_maduro():
+    data = return_data('senwarren')
+
+    return render_template('generic.html',
+                           title='Nicolas Maduro',
+                           info=f'Nicolás Maduro Moros, born 23 November 1962 is a Venezuelan politician who has been the President of Venezuela'
+                                f' since assuming office in 2013. A former bus driver, Maduro rose to become a trade union leader, before being elected'
+                                f" to the National Assembly in 2000. As a result of Chávez's policies and Maduro's continuation of them,"
+                                f" Venezuela's socioeconomic status declined, with crime, inflation, poverty and hunger increasing.",
+                           data=json.dumps(data))
+
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -145,4 +169,3 @@ def return_data(handle):
             data["past companies monitored"][item].update(past_data[item])
 
     return data
-
