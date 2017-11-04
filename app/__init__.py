@@ -129,8 +129,8 @@ def email_data(name, handle):
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login("trump4cast@gmail.com", "cast4trump")
-        server.sendmail("trump4cast@gmail.com", "james.miles2@mail.dcu.ie", text)
+        server.login("EMAIL", "PASSWORD")
+        server.sendmail("EMAIL", "PASSWORD", text)
         server.quit()
 
     except smtplib.SMTPException as error:
